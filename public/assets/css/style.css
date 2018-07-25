@@ -1,0 +1,32 @@
+body {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+
+h1 {
+	text-align: center;
+}
+
+h2 {
+	text-align: center;
+}
+
+#add-form {
+	text-align: center;
+}
+
+#list-wrapper {
+	width: 90%;
+	margin: 0 auto;
+}
+
+.burger-list {
+	float: left;
+	width: 50%;
+}
+
+ul {
+	display: table;
+	margin: 0 auto;
+}
