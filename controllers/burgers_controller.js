@@ -1,7 +1,8 @@
 // ============== GLOBAL VARIABLES ==============
 	var express = require("express");
-	// var burger = require("../models/burger.js");
+	var db = require("../models");
 
+	var Burger = db.burger;
 	var router = express.Router();
 
 // ============== MAIN PROCESSES ==============
@@ -22,37 +23,42 @@
 	router.put("/:id", function(updtReq, updtResp) {
 		devourBurger(updtResp, updtReq.params.id);
 	});
+	
 	module.exports = router;
 
 // ============== FUNCTIONS ==============
 
 	function displayBurgers(response) {
 		
-		// Grab all the burgers saved in the database and then...
-		burger.selectAll(function(results) {
-
-			// render the burgers to the page
+		Burger.findAll().then(function(results) {
 			response.render("index", {burgers: results});
 		});
 	}
 
 	function addBurger(request, response) {
 
-		// Insert the new burger to the table and then...
-		burger.insertOne(request.body.burgerName, function() {
+		var newBurger = {
+			burger_name: request.body.burgerName
+		};
 
-			// Redirect the page to re-display the list of burgers
+		Burger.create(newBurger).then(function() {
 			response.redirect("/");
 		});
 	}
 
 	function devourBurger(response, id) {
 
-		// When a burger is devoured, change the devoured value of the burger
-		// to true in the database and then...
-		burger.updateOne(true, parseInt(id), function() {
+		var values = {
+			devoured: true
+		};
 
-			// Redirect the page to re-display the list of burgers
+		var condition = {
+			where: {
+				id: parseInt(id)
+			}
+		};
+
+		Burger.update(values, condition).then(function() {
 			response.redirect("/");
 		});
 	}

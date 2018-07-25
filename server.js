@@ -4,7 +4,7 @@
 	var exphbs = require("express-handlebars");
 	var methodOverride = require("method-override");
 	var db = require("./models/index.js");
-	// var routes = require("./controllers/burgers_controller.js");
+	var routes = require("./controllers/burgers_controller.js");
 
 	var PORT = 3000;
 	var app = express();
@@ -30,4 +30,4 @@
 		});
 	});
 
-	// app.use("/", routes);
+	app.use("/", routes);
